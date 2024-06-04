@@ -11,3 +11,15 @@
  (c_library_flags
   (:standard
    (:include ../config/cclib.sexp))))
+
+(rule
+ (enabled_if
+  (<> %{context_name} "unikraft"))
+ (action
+  (write-file clock_stubs.c "")))
+
+(rule
+ (enabled_if
+  (= %{context_name} "unikraft"))
+ (action
+  (copy ../unix/clock_stubs.c clock_stubs.c)))
